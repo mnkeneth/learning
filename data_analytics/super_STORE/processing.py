@@ -9,6 +9,10 @@ PARENT_PATH = Path.cwd()
 FILE_NAME = "global_Superstore.parquet"
 FULL_PATHNAME = PARENT_PATH / FILE_NAME
 
+# Final working dataset
+WORKING_FILE_NAME = "wrking_Superstore.parquet"
+WORKING_PATH = PARENT_PATH / WORKING_FILE_NAME
+
 dataset = pl.read_parquet(FULL_PATHNAME.resolve())
 
 # Renaming dataset column header
@@ -98,8 +102,15 @@ unique_customers = customer_dataset.select(pl.col("customer_name").unique())
 # print(unique_customers)
 
 
-print(order_dataset)
 # Processing products data
 product_dataset = dataset.select(pl.col(PRODUCT_DETAILS))
 # print(product_dataset.null_count)
 
+
+# Defining the final dataframes
+wrking_dataset = pl.concat([order_dataset,
+                            customer_dataset,
+                            product_dataset], how="horizontal")
+
+# Exporting the final working dataset for data analytics
+wrking_dataset.write_parquet(WORKING_PATH.resolve())
