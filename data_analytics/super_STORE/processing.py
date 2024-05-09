@@ -2,6 +2,7 @@
 
 import polars as pl
 from pathlib import Path
+from datetime import datetime
 
 # Reading parquet dataset
 PARENT_PATH = Path.cwd()
