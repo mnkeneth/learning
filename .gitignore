@@ -1,0 +1,5 @@
+# Ignoring data sources file formats
+*.xlsx
+*.csv
+*.paraquet
+*.fickle
