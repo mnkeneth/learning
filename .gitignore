@@ -1,5 +1,5 @@
 # Ignoring data sources file formats
 *.xlsx
 *.csv
-*.paraquet
+*.parquet
 *.fickle
