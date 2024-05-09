@@ -16,3 +16,13 @@ new_column_name = (str(dataset.columns).
                    replace(",_", ", "))
 
 dataset.columns = eval(new_column_name)
+
+# Defining columns based on use cases
+ORDER_DETAILS = ['order_id', 'order_date', 'ship_date', 'ship_mode',
+                 'order_priority']
+
+CUSTOMER_DETAILS = ['customer_name', 'segment', 'city', 'state',
+                    'country', 'market', 'region']
+
+PRODUCT_DETAILS = ['product_id', 'category', 'sub-category', 'product_name',
+                   'sales', 'quantity', 'discount', 'profit', 'shipping_cost']
