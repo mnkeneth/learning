@@ -73,5 +73,29 @@ unique_priority = order_dataset.select(pl.col('order_priority'))
 order_dataset = order_dataset.with_columns(pl
                                            .col('order_priority')
                                            .str.to_uppercase())
+# # Processing customer details
+customer_dataset = dataset.select(pl.col(CUSTOMER_DETAILS))
+
+# ## Getting unique sections for listed columns
+# 1. segment
+unique_segment = customer_dataset.select(pl.col("segment").unique())
+# print(unique_segment)
+
+# 2. country
+unique_country = customer_dataset.select(pl.col("country").unique())
+# print(unique_country)
+
+# 3. market
+unique_market = customer_dataset.select(pl.col("market").unique())
+# print(unique_market)
+
+# 4. region
+unique_region = customer_dataset.select(pl.col("region").unique())
+# print(unique_region)
+
+# 5. customer_names
+unique_customers = customer_dataset.select(pl.col("customer_name").unique())
+# print(unique_customers)
+
 
 print(order_dataset)
