@@ -64,3 +64,9 @@ order_dataset = order_and_ship_df.with_columns(orders_dataset
                                                                'ship_mode',
                                                                'order_priority'
                                                                ])))
+
+# ## Defining order_priority to UPPER_CASE for ease of reference and uniqueness.
+unique_priority = order_dataset.select(pl.col('order_priority'))
+# print(unique_priority.unique())
+
+order_dataset = order_dataset.with_columns(pl.col('order_priority').str.to_uppercase())
