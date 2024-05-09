@@ -99,3 +99,7 @@ unique_customers = customer_dataset.select(pl.col("customer_name").unique())
 
 
 print(order_dataset)
+# Processing products data
+product_dataset = dataset.select(pl.col(PRODUCT_DETAILS))
+# print(product_dataset.null_count)
+
