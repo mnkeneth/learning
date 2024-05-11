@@ -19,7 +19,7 @@ COLUMNS = ['country', 'sales', 'discount', 'profit']
 sales_dataset = dataset.select(pl.col(COLUMNS))
 
 # Group by country
-sales_by_country = sales_dataset.groupby(
+sales_by_country = sales_dataset.group_by(
                                  "country").agg(pl.col(
                                                       'sales',
                                                       'discount',
