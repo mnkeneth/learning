@@ -47,6 +47,19 @@ class Location_Data:
                                            descending=True)
         return country_sales
 
+    def sales_expense(self):
+        # Aggregating the discount and shipping costs
+        sales_expense_by_country = self.dataset.group_by(
+                                            "country").agg(pl.col(
+                                                               'discount',
+                                                               'shipping_cost'
+                                                           ).sum())
+        # Sorting the data based on shipping cost.
+        sales_expense_by_country = sales_expense_by_country.sort(
+                                                    by=pl.col("shipping_cost"),
+                                                    descending=True)
+
+        return sales_expense_by_country
 
 # Country Data Reporting
 location_data = Location_Data()
