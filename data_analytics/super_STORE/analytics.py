@@ -22,6 +22,16 @@ class Location_Data:
 
         self.dataset = dataset.select(pl.col(self.columns))
 
+    def totals(self):
+        # Total Sales, discounts, profit and shipping cost
+        totals = self.dataset.select(pl.col(
+                                         'sales',
+                                         'discount',
+                                         'profit',
+                                         'shipping_cost'
+                                     ).sum())
+        return totals
+
     def sales_by_country(self):
         # Group by country
         country_sales = self.dataset.group_by(
