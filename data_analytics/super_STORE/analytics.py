@@ -38,7 +38,8 @@ class Location_Data:
                                          "country").agg(pl.col(
                                                      'sales',
                                                      'discount',
-                                                     'profit')
+                                                     'profit',
+                                                     'shipping_cost')
                                                .sum())
 
         # Sorting by the profitable country
