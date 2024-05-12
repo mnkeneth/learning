@@ -12,22 +12,32 @@ WORKING_DATASET = PARENT_PATH / WORKING_FILE_NAME
 
 dataset = pl.read_parquet(WORKING_DATASET.resolve())
 
-# Finacial data reports.
-# # Total sales by country
 
-COLUMNS = ['country', 'sales', 'discount', 'profit']
-sales_dataset = dataset.select(pl.col(COLUMNS))
+class Country_Data:
+    # Finacial data reports.
+    # # Total sales by country
+    def __init__(self):
+        self.columns = ['country', 'sales', 'discount', 'profit']
+        self.dataset = dataset.select(pl.col(self.columns))
 
-# Group by country
-sales_by_country = sales_dataset.group_by(
-                                 "country").agg(pl.col(
-                                                      'sales',
-                                                      'discount',
-                                                      'profit')
-                                                .sum())
+    def sales_by_country(self):
+        # Group by country
+        country_sales = self.dataset.group_by(
+                                         "country").agg(pl.col(
+                                                     'sales',
+                                                     'discount',
+                                                     'profit')
+                                               .sum())
 
-# Sorting by the profitable country
-sales_by_country = sales_by_country.sort(by=pl.col("profit"), descending=True)
+        # Sorting by the profitable country
+        country_sales = country_sales.sort(by=pl.col("profit"),
+                                           descending=True)
+        return country_sales
+
+
+# Country Data Reporting
+country_data = Country_Data()
+
 
 with pl.Config(
      tbl_cell_numeric_alignment="RIGHT",
@@ -38,5 +48,5 @@ with pl.Config(
      tbl_hide_dataframe_shape=True,
      ):
 
-    print(sales_by_country.head(9))
+    print(country_data.sales_by_country().head(9))
 
