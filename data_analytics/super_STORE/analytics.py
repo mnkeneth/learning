@@ -61,6 +61,13 @@ class Location_Data:
 
         return sales_expense_by_country
 
+    def sales_by_region(self):
+        # Generating sales report based on the regions
+        regional_sales = self.dataset.group_by(
+                                "region").agg(pl.col(
+                                                 'sales'
+                                              ).sum())
+        return regional_sales
 # Country Data Reporting
 location_data = Location_Data()
 
