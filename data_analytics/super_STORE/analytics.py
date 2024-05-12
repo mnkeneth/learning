@@ -67,6 +67,8 @@ class Location_Data:
                                 "region").agg(pl.col(
                                                  'sales'
                                               ).sum())
+        regional_sales = regional_sales.sort(by=pl.col('sales'),
+                                             descending=True)
         return regional_sales
 # Country Data Reporting
 location_data = Location_Data()
