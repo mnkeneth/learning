@@ -82,6 +82,31 @@ class Product_Data:
         self.dataset = dataset.select(pl.col(self.columns))
         return
 
+    def products_profitability(self):
+        self.top_and_loss_product = dict()
+        products_by_profits = self.dataset.select([
+                                                  'product_name',
+                                                  'sales',
+                                                  'profit'])
+
+        products_by_profits = products_by_profits.group_by(
+                                            'product_name').agg(
+                                             pl.col('sales', 'profit').sum())
+        # Sorting the data by profits
+        self.top_profit_product = products_by_profits.sort(
+                                                      by=pl.col('profit'),
+                                                      descending=True
+                                                      ).head(9)
+
+        self.least_loss_product = products_by_profits.sort(
+                                                        by=pl.col('profit'),
+                                                        descending=False
+                                                        ).head(9)
+        self.top_and_loss_product['top_products'] = self.top_profit_product
+        self.top_and_loss_product['least_products'] = self.least_loss_product
+
+        return self.top_and_loss_product
+
     
 with pl.Config(
      tbl_cell_numeric_alignment="RIGHT",
