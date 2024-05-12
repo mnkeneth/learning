@@ -18,7 +18,7 @@ class Location_Data:
     # # Total sales by country
     def __init__(self):
         self.columns = ['country', 'sales', 'discount',
-                        'profit', 'shipping_cost']
+                        'profit', 'shipping_cost', 'region']
 
         self.dataset = dataset.select(pl.col(self.columns))
 
