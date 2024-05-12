@@ -74,6 +74,15 @@ class Location_Data:
 location_data = Location_Data()
 
 
+class Product_Data:
+    def __init__(self):
+        self.columns = ['product_id', 'category', 'sub-category',
+                        'product_name', 'sales', 'profit']
+
+        self.dataset = dataset.select(pl.col(self.columns))
+        return
+
+    
 with pl.Config(
      tbl_cell_numeric_alignment="RIGHT",
      thousands_separator=True,
