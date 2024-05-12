@@ -13,7 +13,7 @@ WORKING_DATASET = PARENT_PATH / WORKING_FILE_NAME
 dataset = pl.read_parquet(WORKING_DATASET.resolve())
 
 
-class Country_Data:
+class Location_Data:
     # Finacial data reports.
     # # Total sales by country
     def __init__(self):
@@ -36,7 +36,7 @@ class Country_Data:
 
 
 # Country Data Reporting
-country_data = Country_Data()
+location_data = Location_Data()
 
 
 with pl.Config(
@@ -48,5 +48,4 @@ with pl.Config(
      tbl_hide_dataframe_shape=True,
      ):
 
-    print(country_data.sales_by_country().head(9))
-
+    print(location_data.sales_by_country().head(9))
