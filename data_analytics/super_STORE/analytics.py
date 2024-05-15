@@ -108,6 +108,37 @@ class Product_Data:
         return self.top_and_loss_product
 
     
+
+class Market_Data:
+    def __init__(self):
+        self.columns = ['segment', 'market', 'region',
+                        'sales', 'profit']
+        self.dataset = dataset.select(pl.col(self.columns))
+        return
+
+    def market_performance(self):
+        market_results = self.dataset.group_by("market").agg(pl.col(
+                                                   ['sales', 'profit']
+                                                    ).sum())
+        market_results = market_results.sort(by=pl.col("profit"),
+                                             descending=True)
+        return market_results
+
+    def segment(self):
+        segment = self.dataset.group_by("segment").agg(pl.col(
+                                                   ['sales', 'profit']
+                                                    ).sum())
+        segment = segment.sort(by=pl.col("profit"),
+                               descending=True)
+        return segment
+
+    def region(self):
+        region = self.dataset.group_by("region").agg(pl.col(
+                                                   ['sales', 'profit']
+                                                    ).sum())
+        region = region.sort(by=pl.col("profit"),
+                             descending=True)
+        return region
 with pl.Config(
      tbl_cell_numeric_alignment="RIGHT",
      thousands_separator=True,
