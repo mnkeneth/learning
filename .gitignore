@@ -1,3 +1,6 @@
+# Ignoring python files
+**/__pycache__/**
+
 # Ignoring data sources file formats
 *.xlsx
 *.csv
