@@ -70,8 +70,6 @@ class Location_Data:
         regional_sales = regional_sales.sort(by=pl.col('sales'),
                                              descending=True)
         return regional_sales
-# Country Data Reporting
-location_data = Location_Data()
 
 
 class Product_Data:
@@ -107,7 +105,6 @@ class Product_Data:
 
         return self.top_and_loss_product
 
-    
 
 class Market_Data:
     def __init__(self):
@@ -139,13 +136,3 @@ class Market_Data:
         region = region.sort(by=pl.col("profit"),
                              descending=True)
         return region
-with pl.Config(
-     tbl_cell_numeric_alignment="RIGHT",
-     thousands_separator=True,
-     float_precision=2,
-     tbl_formatting="ASCII_MARKDOWN",
-     tbl_hide_column_data_types=True,
-     tbl_hide_dataframe_shape=True,
-     ):
-
-    print(location_data.sales_by_country().head(9))
